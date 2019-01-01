@@ -305,7 +305,6 @@ class PostMeta extends CustomMeta {
 				wp_editor( $value, $id, $args );
 				break;	
 			case 'image':
-			case 'imagelist':
 				if ($label) { echo '<label for="'.$name.'">'.$label.'</label><br />'; }
 				$upload_link = esc_url( get_upload_iframe_src( 'image', $this->post_id ) );
 				$has_image = false;
@@ -313,15 +312,15 @@ class PostMeta extends CustomMeta {
 					$your_img_src = wp_get_attachment_image_src( $value, 'medium' );
 					$has_image = is_array( $your_img_src );
 				}
-				echo '<div class="meta-img-field" style="margin: 8px;" data-postid="'.$post_id.'">';
-					echo '<div class="meta-img-container" style=" display: inline-block; margin-right: 8px; vertical-align: middle; ">';
+				echo '<div class="meta-img-field" style="margin: 1px;" data-postid="'.$post_id.'">';
+					echo '<div class="meta-img-container" style=" display: inline-block; vertical-align: middle; ">';
 					if ( $has_image ) {
-				        echo '<img src="'.$your_img_src[0].'" alt="" style="max-height:50px; width: auto;" />';
+				        echo '<img src="'.$your_img_src[0].'" alt="" style="max-height:50px; width: auto; margin-right: 8px;" />';
 					}
 					echo '</div>';
 					$file_type = ( !empty($label) ?  $label : __('image','tablank') );
-					echo '<a class="upload-meta-img '.( $has_image ? 'hidden' : '').'" href="'.$upload_link.'">'.__('Add','tablank').' '.$file_type.'</a>';
-	    			echo '<a class="delete-meta-img '.( !$has_image ? 'hidden' : '').'" href="#">'.__('Remove','tablank').' '.$file_type.'</a>';
+					echo '<a class="js-upload-meta-img '.( $has_image ? 'hidden' : '').'" href="'.$upload_link.'">'.__('Add','tablank').' '.$file_type.'</a>';
+	    			echo '<a class="js-delete-meta-img '.( !$has_image ? 'hidden' : '').'" href="#">'.__('Remove','tablank').' '.$file_type.'</a>';
 	    			echo '<input class="meta-img-id" name="'.$name.'" type="hidden" value="'.esc_attr( $value ).'" />';
     			echo '</div>';
 				break;

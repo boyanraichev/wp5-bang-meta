@@ -92,7 +92,7 @@ class TermMeta extends CustomMeta {
 									$icon_src = wp_get_attachment_image_src( $saved, 'medium' );
 								}
 								?>
-								<div class="meta-img-field" style="margin: 8px;" data-postid="">
+								<div class="meta-img-field" style="margin: 1px;" data-postid="">
 									<div class="meta-img-container" style=" display: inline-block; vertical-align: middle; ">
 										<?php
 										if ( $icon_src ) {
