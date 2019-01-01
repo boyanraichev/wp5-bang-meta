@@ -5,20 +5,19 @@ if (!defined('ABSPATH')) die;
 
 abstract class CustomMeta {
 	
-	/** @var The single instance of the class */
-	private static $_instance = null;	
+	private static $_instances = array();
 	
-	// Don't load more than one instance of the class
-	public static function instance() {
-		if ( null == self::$_instance ) {
-            self::$_instance = new self();
+    public static function instance() {
+        $class = get_called_class();
+        if (!isset(self::$_instances[$class])) {
+            self::$_instances[$class] = new $class();
         }
-        return self::$_instance;
+        return self::$_instances[$class];
     }
     
 	private $fieldsRaw = [];
 	
-	private $fields = [];
+	public $fields = [];
 	
 	public function setFields(array $fields, int $priority = 10) {
 		
@@ -31,7 +30,7 @@ abstract class CustomMeta {
 		$this->fields = [];
 		
 		foreach($this->fieldsRaw as $fields) {
-			$this->fields .= $fields;
+			$this->fields += $fields;
 		}
 		
 		return $this->fields;
@@ -46,7 +45,7 @@ abstract class CustomMeta {
 	
 	abstract function register();
 	
-	public hasPriority($priority) {
+	public function hasPriority($priority) {
 		
 		if (isset($this->fieldsRaw[$priority])) {
 			return true;

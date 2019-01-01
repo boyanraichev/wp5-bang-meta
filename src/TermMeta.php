@@ -10,8 +10,6 @@ class TermMeta extends CustomMeta {
      */
     public function __construct() {
 	    
-	    //add_action( 'admin_enqueue_scripts', [ $this, 'scripts' ] );
-	    
 	    add_action('wp_loaded',[$this,'register']);
 	    
 	}
@@ -27,13 +25,7 @@ class TermMeta extends CustomMeta {
  			
  		}
 		
-	}	
-	
-	public function scripts() {
-
-        wp_enqueue_media();
-
-    }
+	}
 	
 	public function createTaxonomy($taxonomy) {
     	

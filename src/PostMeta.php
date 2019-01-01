@@ -4,7 +4,7 @@ namespace Boyo\WPBangMeta;
 if (!defined('ABSPATH')) die;
 
 class PostMeta extends CustomMeta {
-
+	
     /**
      * Constructor
      */
