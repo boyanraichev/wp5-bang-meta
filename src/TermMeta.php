@@ -93,15 +93,15 @@ class TermMeta extends CustomMeta {
 								}
 								?>
 								<div class="meta-img-field" style="margin: 8px;" data-postid="">
-									<div class="meta-img-container" style=" display: inline-block; margin-right: 8px; vertical-align: middle; ">
+									<div class="meta-img-container" style=" display: inline-block; vertical-align: middle; ">
 										<?php
 										if ( $icon_src ) {
-									        echo '<img src="'.$icon_src[0].'" alt="" style="max-height:50px; width: auto;" />';
+									        echo '<img src="'.$icon_src[0].'" alt="" style="max-height:50px; width: auto; margin-right: 8px;" />';
 										}
 										?>
 									</div>
-									<a class="upload-meta-img <?php echo ( $icon_src ? 'hidden' : ''); ?>" href="<?php echo $upload_link; ?>"><?php _e('Add image','tablank'); ?></a>
-					    			<a class="delete-meta-img <?php echo ( !$icon_src ? 'hidden' : ''); ?>" href="#"><?php _e('Remove image','tablank'); ?></a>
+									<a class="js-upload-meta-img <?php echo ( $icon_src ? 'hidden' : ''); ?>" href="<?php echo $upload_link; ?>"><?php _e('Add image','wp5-blank'); ?></a>
+					    			<a class="js-delete-meta-img <?php echo ( !$icon_src ? 'hidden' : ''); ?>" href="#"><?php _e('Remove image','wp5-blank'); ?></a>
 					    			<input class="meta-img-id" name="<?php echo $field['name']; ?>" type="hidden" value="<?php echo esc_attr( $saved ); ?>" />
 				    			</div>
 					        </td>

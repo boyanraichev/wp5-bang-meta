@@ -10,11 +10,12 @@ var bangMeta = {
 		
 		this.metaImgListeners();
 		
-/*
-		jQuery('#postcustomstuff tbody').on('rowAdded', function(event) {
-			metaBoxImgListeners();
-		});
-*/
+		var tables = document.querySelectorAll('#postcustomstuff tbody');
+		if (tables) {
+			Array.from(tables).forEach(table => {
+				table.addEventListener('rowAdded', bangMeta.metaImgListeners);	
+			});
+		}
 		
 	},
 	
@@ -27,7 +28,7 @@ var bangMeta = {
 			});
 		}
 		
-		let handels = document.querySelectorAll('.delete-meta-img');
+		let handels = document.querySelectorAll('.js-delete-meta-img');
 		if (handels) {
 			Array.from(handels).forEach(handel => {
 				handel.addEventListener('click', bangMeta.metaImgDelete);	
@@ -41,53 +42,45 @@ var bangMeta = {
 		event.preventDefault();
     
 	    var frame;
-	    var metaBox = jQuery(this).closest('.meta-img-field');
-	    var addImgLink = metaBox.find('.upload-meta-img');
-	    var delImgLink = metaBox.find( '.delete-meta-img');
-	    var imgContainer = metaBox.find( '.meta-img-container');
-	    var imgIdInput = metaBox.find( '.meta-img-id' );
-	    var postID = metaBox.data('postid'); 
+	    var metaBox = this.closest('.meta-img-field');
+	    var addImgLink = metaBox.querySelector('.js-upload-meta-img');
+	    var delImgLink = metaBox.querySelector( '.js-delete-meta-img');
+	    var imgContainer = metaBox.querySelector( '.meta-img-container');
+	    var imgIdInput = metaBox.querySelector( '.meta-img-id' );
+	    var postID = metaBox.dataset.postid; 
 	    
 	    // If the media frame already exists, reopen it.
 	    if ( frame ) {
-	      frame.open();
-	      return;
+			frame.open();
+			return;
 	    }
 	    
 	    // Create a new media frame
 	    frame = wp.media({
-	      title: 'Select or Upload Media',
-	      button: {
-	        text: 'Use this media'
-	      },
-	      multiple: false,  // Set to true to allow multiple files to be selected
-	      library: {
-	                type: 'image',
-	                post_parent: postID // some post id
-	            }
+			title: 'Select or Upload Media',
+	        button: {
+				text: 'Use this media'
+	        },
+			multiple: false,  // Set to true to allow multiple files to be selected
+			library: {
+	            type: 'image',
+	            post_parent: postID // the current post id
+	        }
 	    });
 	
-	    
-	    // When an image is selected in the media frame...
 	    frame.on( 'select', function() {
 	      
-	      // Get media attachment details from the frame state
-	      var attachment = frame.state().get('selection').first().toJSON();
-	
-	      // Send the attachment URL to our custom image input field.
-	      imgContainer.append( '<img src="'+attachment.url+'" alt="" style="max-height:50px; width: auto;" />' );
-	
-	      // Send the attachment id to our hidden input
-	      imgIdInput.val( attachment.id );
-	
-	      // Hide the add image link
-	      addImgLink.addClass( 'hidden' );
-	
-	      // Unhide the remove image link
-	      delImgLink.removeClass( 'hidden' );
+			// Get media attachment details from the frame state
+			var attachment = frame.state().get('selection').first().toJSON();
+			
+			imgContainer.innerHTML = '<img src="'+attachment.url+'" alt="" style="max-height:50px; width: auto; margin-right: 8px;">';
+			
+			imgIdInput.value = attachment.id;
+			
+			addImgLink.classList.add( 'hidden' );
+			delImgLink.classList.remove( 'hidden' );
 	    });
-	
-	    // Finally, open the modal on click
+	    
 	    frame.open();
 	
 	},
@@ -96,23 +89,18 @@ var bangMeta = {
 	
 		event.preventDefault();
 
-		var metaBox = jQuery(this).closest('.meta-img-field');
-	    var addImgLink = metaBox.find('.upload-meta-img');
-	    var delImgLink = metaBox.find( '.delete-meta-img');
-	    var imgContainer = metaBox.find( '.meta-img-container');
-	    var imgIdInput = metaBox.find( '.meta-img-id' );
+		var metaBox = this.closest('.meta-img-field');
+	    var addImgLink = metaBox.querySelector('.upload-meta-img');
+	    var delImgLink = metaBox.querySelector( '.delete-meta-img');
+	    var imgContainer = metaBox.querySelector( '.meta-img-container');
+	    var imgIdInput = metaBox.querySelector( '.meta-img-id' );
 	    
-	    // Clear out the preview image
-	    imgContainer.html( '' );
+	    imgContainer.innerHTML = '';
 	
-	    // Un-hide the add image link
-	    addImgLink.removeClass( 'hidden' );
+	    addImgLink.classList.remove( 'hidden' );
+	    delImgLink.classList.add( 'hidden' );
 	
-	    // Hide the delete image link
-	    delImgLink.addClass( 'hidden' );
-	
-	    // Delete the image id from the hidden input
-	    imgIdInput.val( '' );
+	    imgIdInput.value = '';
 		
 	}
 	
