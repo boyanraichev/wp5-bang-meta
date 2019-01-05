@@ -11,8 +11,10 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
-        "boyo/wp5-bang": "*"
+        "php": ">=7.1.0"
+    },
+    "suggest": {
+        "boyo/wp5-bang": "Base package for WordPress theme development"
     },
     "autoload": {
 	    "files": [
