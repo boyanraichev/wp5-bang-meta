@@ -365,7 +365,7 @@ class PostMeta extends CustomMeta {
 					'posts_per_page' => 20,
 					'post_status' => 'publish',
 				); 
-				$posts = new WP_Query($args);
+				$posts = new \WP_Query($args);
 				if ($posts->have_posts()) {
 					echo '<select name="'.$name.'" id="'.$id.'">';
 						echo '<option value="">'.__('None','tablank').'</option>';
