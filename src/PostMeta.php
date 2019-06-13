@@ -305,6 +305,7 @@ class PostMeta extends CustomMeta {
 				wp_editor( $value, $id, $args );
 				break;	
 			case 'image':
+			case 'video':
 				if ($label) { echo '<label for="'.$name.'">'.$label.'</label><br />'; }
 				$upload_link = esc_url( get_upload_iframe_src( 'image', $this->post_id ) );
 				$has_image = false;
@@ -315,7 +316,11 @@ class PostMeta extends CustomMeta {
 				echo '<div class="meta-img-field" style="margin: 1px;" data-postid="'.$post_id.'">';
 					echo '<div class="meta-img-container" style=" display: inline-block; vertical-align: middle; ">';
 					if ( $has_image ) {
-				        echo '<img src="'.$your_img_src[0].'" alt="" style="max-height:50px; width: auto; margin-right: 8px;" />';
+				        if ($type=='video') {
+						    echo '<video src="'.$your_img_src[0].'" alt="" style="max-height:50px; width: auto; margin-right: 8px;"></video>';								
+						} else {
+					        echo '<img src="'.$your_img_src[0].'" alt="" style="max-height:50px; width: auto; margin-right: 8px;" />';							
+						}
 					}
 					echo '</div>';
 					$file_type = ( !empty($label) ?  $label : __('image','tablank') );
@@ -445,7 +450,7 @@ class PostMeta extends CustomMeta {
 							case 'single':
 								switch ($section['meta_type']) {
 									case 'image':
-									case 'imagelist':
+									case 'video':
 									case 'number':
 									case 'dropdown_pages':
 									case 'dropdown_posts':

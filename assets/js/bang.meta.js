@@ -48,7 +48,8 @@ var bangMeta = {
 	    var imgContainer = metaBox.querySelector( '.meta-img-container');
 	    var imgIdInput = metaBox.querySelector( '.meta-img-id' );
 	    var postID = metaBox.dataset.postid; 
-	    
+	    var type = (metaBox.dataset.type=='video' ? 'video' : 'image');
+
 	    // If the media frame already exists, reopen it.
 	    if ( frame ) {
 			frame.open();
@@ -63,7 +64,7 @@ var bangMeta = {
 	        },
 			multiple: false,  // Set to true to allow multiple files to be selected
 			library: {
-	            type: 'image',
+	            type: type,
 	            post_parent: postID // the current post id
 	        }
 	    });
@@ -72,8 +73,12 @@ var bangMeta = {
 	      
 			// Get media attachment details from the frame state
 			var attachment = frame.state().get('selection').first().toJSON();
-			
-			imgContainer.innerHTML = '<img src="'+attachment.url+'" alt="" style="max-height:50px; width: auto; margin-right: 8px;">';
+
+			if (type=='video') {
+				imgContainer.innerHTML = '<video src="'+attachment.url+'" alt="" style="max-height:50px; width: auto; margin-right: 8px;" controls></video>';	
+			} else {
+				imgContainer.innerHTML = '<img src="'+attachment.url+'" alt="" style="max-height:50px; width: auto; margin-right: 8px;">';
+			}
 			
 			imgIdInput.value = attachment.id;
 			
