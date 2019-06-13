@@ -313,7 +313,7 @@ class PostMeta extends CustomMeta {
 					$your_img_src = wp_get_attachment_image_src( $value, 'medium' );
 					$has_image = is_array( $your_img_src );
 				}
-				echo '<div class="meta-img-field" style="margin: 1px;" data-postid="'.$post_id.'">';
+				echo '<div class="meta-img-field" style="margin: 1px;" data-postid="'.$post_id.'" data-type="'.$type.'">';
 					echo '<div class="meta-img-container" style=" display: inline-block; vertical-align: middle; ">';
 					if ( $has_image ) {
 				        if ($type=='video') {
