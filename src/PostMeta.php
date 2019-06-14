@@ -310,21 +310,26 @@ class PostMeta extends CustomMeta {
 				$upload_link = esc_url( get_upload_iframe_src( 'image', $this->post_id ) );
 				$has_image = false;
 				if (!empty($value)) {
-					$your_img_src = wp_get_attachment_image_src( $value, 'medium' );
-					$has_image = is_array( $your_img_src );
+					if ($type=='video') {
+						$your_img_src = wp_get_attachment_url($value);
+						$has_image = ( !empty($your_img_src) ?? false );
+					} else {	
+						$your_img_src = wp_get_attachment_image_src( $value, 'medium' );
+						$has_image = is_array( $your_img_src );
+					}
 				}
 				echo '<div class="meta-img-field" style="margin: 1px;" data-postid="'.$post_id.'" data-type="'.$type.'">';
 					echo '<div class="meta-img-container" style=" display: inline-block; vertical-align: middle; ">';
 					if ( $has_image ) {
-				        if ($type=='video') {
-						    echo '<video src="'.$your_img_src[0].'" alt="" style="max-height:50px; width: auto; margin-right: 8px;"></video>';								
+				        	if ($type=='video') {
+							echo '<video src="'.$your_img_src.'" style="max-height:50px; width: auto; margin-right: 8px;" controls></video>';								
 						} else {
-					        echo '<img src="'.$your_img_src[0].'" alt="" style="max-height:50px; width: auto; margin-right: 8px;" />';							
+							echo '<img src="'.$your_img_src[0].'" style="max-height:50px; width: auto; margin-right: 8px;" />';							
 						}
 					}
-					echo '</div>';
-					$file_type = ( !empty($label) ?  $label : __('image','tablank') );
-					echo '<a class="js-upload-meta-img '.( $has_image ? 'hidden' : '').'" href="'.$upload_link.'">'.__('Add','tablank').' '.$file_type.'</a>';
+				echo '</div>';
+				$file_type = ( !empty($label) ?  $label : __('image','tablank') );
+				echo '<a class="js-upload-meta-img '.( $has_image ? 'hidden' : '').'" href="'.$upload_link.'">'.__('Add','tablank').' '.$file_type.'</a>';
 	    			echo '<a class="js-delete-meta-img '.( !$has_image ? 'hidden' : '').'" href="#">'.__('Remove','tablank').' '.$file_type.'</a>';
 	    			echo '<input class="meta-img-id" name="'.$name.'" type="hidden" value="'.esc_attr( $value ).'" />';
     			echo '</div>';
