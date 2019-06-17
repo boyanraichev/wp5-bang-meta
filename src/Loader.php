@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) die;
 use Boyo\WPBangMeta\PostMeta;
 use Boyo\WPBangMeta\TermMeta;
 
-define('WP5BANGMETA_VERSION','0.4.0');
+define('WP5BANGMETA_VERSION','0.8.5');
 
 if (! function_exists('config')) {
 	
