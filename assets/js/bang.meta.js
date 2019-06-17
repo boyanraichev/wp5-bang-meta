@@ -95,8 +95,8 @@ var bangMeta = {
 		event.preventDefault();
 
 		var metaBox = this.closest('.meta-img-field');
-	    var addImgLink = metaBox.querySelector('.upload-meta-img');
-	    var delImgLink = metaBox.querySelector( '.delete-meta-img');
+	    var addImgLink = metaBox.querySelector('.js-upload-meta-img');
+	    var delImgLink = metaBox.querySelector( '.js-delete-meta-img');
 	    var imgContainer = metaBox.querySelector( '.meta-img-container');
 	    var imgIdInput = metaBox.querySelector( '.meta-img-id' );
 	    
