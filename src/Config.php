@@ -16,6 +16,14 @@ class Config {
         return self::$_instance;
     }	
 
+	public function __construct() {
+	    
+		if (!defined('PROJECT_DIR')) {
+			define('PROJECT_DIR',dirname(__DIR__,4));
+		} 
+		
+	}
+	
 	// holds the loaded config files
     private $config = [];
     
@@ -28,9 +36,9 @@ class Config {
 		    
 		    if (!isset($this->config[$keySplit[0]])) {
 			    
-			    if (file_exists( THEME_DIR . '/config/' . $keySplit[0] . '.php')) {
+			    if (file_exists( PROJECT_DIR . '/config/' . $keySplit[0] . '.php')) {
 				    
-				    $this->config[$keySplit[0]] = require_once THEME_DIR . '/config/' . $keySplit[0] . '.php';
+				    $this->config[$keySplit[0]] = require_once PROJECT_DIR . '/config/' . $keySplit[0] . '.php';
 			    }
 		    }
 		    

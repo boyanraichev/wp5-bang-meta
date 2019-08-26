@@ -11,7 +11,11 @@ if (! function_exists('config')) {
 	
 	function config($key) {
 		
-		$config = \Boyo\WPBangMeta\Config::instance();
+		if (class_exists('\Boyo\WPBang\Config')) {
+			$config = \Boyo\WPBang\Config::instance();
+		} else {
+			$config = \Boyo\WPBangMeta\Config::instance();
+		}
 		
 		return $config->get($key);
 		
