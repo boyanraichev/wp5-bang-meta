@@ -100,8 +100,8 @@ class TermMeta extends CustomMeta {
 										}
 										?>
 									</div>
-									<a class="js-upload-meta-img <?php echo ( $icon_src ? 'hidden' : ''); ?>" href="<?php echo $upload_link; ?>"><?php _e('Add image','wp5-blank'); ?></a>
-					    			<a class="js-delete-meta-img <?php echo ( !$icon_src ? 'hidden' : ''); ?>" href="#"><?php _e('Remove image','wp5-blank'); ?></a>
+									<a class="js-upload-meta-img <?php echo ( $icon_src ? 'hidden' : ''); ?>" href="<?php echo $upload_link; ?>"><?php _e('Add image','wp5-bang'); ?></a>
+					    			<a class="js-delete-meta-img <?php echo ( !$icon_src ? 'hidden' : ''); ?>" href="#"><?php _e('Remove image','wp5-bang'); ?></a>
 					    			<input class="meta-img-id" name="<?php echo $field['name']; ?>" type="hidden" value="<?php echo esc_attr( $saved ); ?>" />
 				    			</div>
 					        </td>

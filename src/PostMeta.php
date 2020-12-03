@@ -180,8 +180,8 @@ class PostMeta extends CustomMeta {
 						<div id="postcustomstuff">
 						<table id="<?php echo $section['table']; ?>" class="tat-table js-sortable">
 							<thead><tr>
-								<th style="width:90%; "><?php _e('Content','tablank'); ?></th>
-								<th style="width:10%;"><?php _e('Actions','tablank'); ?></th>
+								<th style="width:90%; "><?php _e('Content','wp5-bang'); ?></th>
+								<th style="width:10%;"><?php _e('Actions','wp5-bang'); ?></th>
 							</tr></thead>
 							<tbody id="<?php echo $section['table']; ?>-tbody">
 							<?php 
@@ -328,9 +328,9 @@ class PostMeta extends CustomMeta {
 						}
 					}
 				echo '</div>';
-				$file_type = ( !empty($label) ?  $label : __('image','tablank') );
-				echo '<a class="js-upload-meta-img '.( $has_image ? 'hidden' : '').'" href="'.$upload_link.'">'.__('Add','tablank').' '.$file_type.'</a>';
-	    			echo '<a class="js-delete-meta-img '.( !$has_image ? 'hidden' : '').'" href="#">'.__('Remove','tablank').' '.$file_type.'</a>';
+				$file_type = ( !empty($label) ?  $label : __('image','wp5-bang') );
+				echo '<a class="js-upload-meta-img '.( $has_image ? 'hidden' : '').'" href="'.$upload_link.'">'.__('Add','wp5-bang').' '.$file_type.'</a>';
+	    			echo '<a class="js-delete-meta-img '.( !$has_image ? 'hidden' : '').'" href="#">'.__('Remove','wp5-bang').' '.$file_type.'</a>';
 	    			echo '<input class="meta-img-id" name="'.$name.'" type="hidden" value="'.esc_attr( $value ).'" />';
     			echo '</div>';
 				break;
@@ -373,7 +373,7 @@ class PostMeta extends CustomMeta {
 				$posts = new \WP_Query($args);
 				if ($posts->have_posts()) {
 					echo '<select name="'.$name.'" id="'.$id.'">';
-						echo '<option value="">'.__('None','tablank').'</option>';
+						echo '<option value="">'.__('None','wp5-bang').'</option>';
 						while ($posts->have_posts()) {
 							$posts->the_post();
 							echo '<option value="'.$posts->post->ID.'" '.selected($posts->post->ID,$value,false).'>'.get_the_title().'</option>';
@@ -389,7 +389,7 @@ class PostMeta extends CustomMeta {
 				    'selected'              => $value,
 				    'name'                  => $name,
 				    'class'                 => '', // string
-				    'show_option_none'      => __('None','tablank'), // string
+				    'show_option_none'      => __('None','wp5-bang'), // string
 				    'option_none_value'     => '0',
 				    'post_type'				=> $options['post_type']
 				); 
@@ -402,7 +402,7 @@ class PostMeta extends CustomMeta {
 				    'selected'              => $value,
 				    'name'                  => $name,
 				    'class'                 => '', // string
-				    'show_option_none'      => __('None','tablank'), // string
+				    'show_option_none'      => __('None','wp5-bang'), // string
 				    'option_none_value'     => '0',
 				    'hide_empty'			=> 0,
 				    'taxonomy'				=> $options['taxonomy'],
